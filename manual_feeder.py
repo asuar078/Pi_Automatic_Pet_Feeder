@@ -11,30 +11,45 @@ GPIO.setup(led_pin, GPIO.OUT)
 
 led_state = False
 
-# def toggle_callback(channel):
-#     global led_state
-#     print('Button Pressed')
-#     led_state = not led_state
-#     time.sleep(0.2)
+def toggle_callback(channel):
+    global led_state
+    print "button pressed"
+    led_state = not led_state
 
-# GPIO.add_event_detect(button_pin, GPIO.FALLING, callback=toggle_callback, bouncetime=300)
+    if led_state == False:
+        GPIO.output(led_pin, GPIO.LOW)
+    elif led_state == True:
+        GPIO.output(led_pin, GPIO.HIGH)
 
+GPIO.add_event_detect(button_pin, GPIO.FALLING, callback=toggle_callback, bouncetime=300)
+
+# GPIO.add_event_detect(buttonD, GPIO.RISING, pushMsg, bouncetime=50)
+
+print "Waiting for button press"
 try:
-    print "starting loop"
-
-    while True:
-        input_state = GPIO.input(button_pin)
-        if input_state == False:
-            # print('Button Pressed')
-            led_state = not led_state
-            time.sleep(0.2)
-
-        if led_state == False:
-            GPIO.output(led_pin, GPIO.LOW)
-        elif led_state == True:
-            GPIO.output(led_pin, GPIO.HIGH)
+   while True:
+        time.sleep(0.5)
 except KeyboardInterrupt:
-    GPIO.cleanup()       # clean up GPIO on CTRL+C exit  
-    print "cleaning up gpio"
+    GPIO.cleanup()
+GPIO.cleanup()
 
-GPIO.cleanup()           # clean up GPIO on normal exit  
+# try:
+#     print "starting loop"
+
+#     while True:
+#         # input_state = GPIO.input(button_pin)
+#         # if input_state == False:
+#         #     # print('Button Pressed')
+#         #     led_state = not led_state
+#         #     time.sleep(0.2)
+
+#         if led_state == False:
+#             GPIO.output(led_pin, GPIO.LOW)
+#         elif led_state == True:
+#             GPIO.output(led_pin, GPIO.HIGH)
+
+# except KeyboardInterrupt:
+#     GPIO.cleanup()       # clean up GPIO on CTRL+C exit  
+#     print "cleaning up gpio"
+
+# GPIO.cleanup()           # clean up GPIO on normal exit  
