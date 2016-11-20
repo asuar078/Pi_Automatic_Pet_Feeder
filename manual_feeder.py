@@ -1,5 +1,6 @@
 import time
 import RPi.GPIO as GPIO
+import stepper
 
 GPIO.setmode(GPIO.BCM)
 
@@ -15,6 +16,8 @@ def toggle_callback(channel):
     global led_state
     print "button pressed"
     led_state = not led_state
+
+    stepper.turn_motor(10)
 
     if led_state == False:
         GPIO.output(led_pin, GPIO.LOW)
