@@ -17,7 +17,7 @@ def toggle_callback(channel):
     print "button pressed"
     led_state = not led_state
 
-    stepper.turn_motor(10)
+    stepper.turn_motor(150)
 
     if led_state == False:
         GPIO.output(led_pin, GPIO.LOW)
@@ -35,24 +35,3 @@ try:
 except KeyboardInterrupt:
     GPIO.cleanup()
 GPIO.cleanup()
-
-# try:
-#     print "starting loop"
-
-#     while True:
-#         # input_state = GPIO.input(button_pin)
-#         # if input_state == False:
-#         #     # print('Button Pressed')
-#         #     led_state = not led_state
-#         #     time.sleep(0.2)
-
-#         if led_state == False:
-#             GPIO.output(led_pin, GPIO.LOW)
-#         elif led_state == True:
-#             GPIO.output(led_pin, GPIO.HIGH)
-
-# except KeyboardInterrupt:
-#     GPIO.cleanup()       # clean up GPIO on CTRL+C exit  
-#     print "cleaning up gpio"
-
-# GPIO.cleanup()           # clean up GPIO on normal exit  
